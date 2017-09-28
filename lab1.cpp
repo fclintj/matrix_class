@@ -3,50 +3,55 @@
 #include <sstream> 
 #include <armadillo>
 
-arma::mat read_pgm(std::string name) {
-    int row = 0, col = 0, numrows = 0, numcols = 0;
-    std::ifstream infile(name);
-    std::stringstream ss;
-    std::string inputLine = "";
+arma::mat read_pgm(std::string fname){
+	unsigned char d;
+	char header [100], *ptr;
+    std::ifstream infile;
+	infile.open(fname, std::ios::binary);
 
-    // First line : version
-    getline(infile,inputLine);
-    if(inputLine.compare("P2") != 0) std::cerr << "Version error" << std::endl;
-    // else std::cout << "Version : " << inputLine << std::endl;
+	if (!infile) {
+        std::cout << "Can not open image" << std::endl;;
+		exit(1);
+	}
 
-    // Second line : comment
-    getline(infile,inputLine);
-    // std::cout << "Comment : " << inputLine << std::endl;
+	infile.getline(header,100,'\n');
+	if((header[0]!='P') || header[1]!='5')   /* 'P5' Formay */
+	{
+        std::cout << "Image <" << fname << "> is not in binary PGM 'P5' format." << std::endl;
+		exit(1);
+	}
 
-    // Continue with a stringstream
-    ss << infile.rdbuf();
-    // Third line : size
-    ss >> numcols >> numrows;
-    // std::cout << numrows << " rows and " << numcols << " cols" << std::endl;
+	infile.getline(header,100,'\n');
+	while(header[0]=='#')
+		infile.getline(header,100,'\n');
 
-    arma::mat image(numrows,numcols);
+    int M,N;
+	M=strtol(header,&ptr,0);
+	N=atoi(ptr);
 
-    // Following lines : data
-    for(row = 0; row < numrows; ++row)
-        for (col = 0; col < numcols; ++col) ss >> image(row,col);
+    std::cout << M << " " << N << std::endl;
 
-    // // Now print the array to see the result
-    // for(row = 0; row < numrows; ++row) {
-    //     for(col = 0; col < numcols; ++col) {
-    //         // cout << array[row][col] << " ";
-    //     }
-    //     // cout << endl;
-    // }
-    infile.close();
-    return image;    
+	infile.getline(header,100,'\n');
+
+	// Q=strtol(header,&ptr,0);
+
+    arma::mat fimage(M,N);
+
+	for(int i=0; i<N; i++) {
+		for(int j=0; j<M; j++) {
+			d = infile.get();
+			fimage(i,j)= (int)d;
+		}
+	}
+    return fimage;
 }
-
 void write_pgm(arma::mat image, std::string name) {
     std::ofstream file;
     file.open(name);
     file << "P2" << std::endl;
     file << "# Created by Clint Ferrin" << std::endl;
     file << image.n_cols << " " << image.n_rows << std::endl;
+    file << "255" << std::endl;
     
     for (unsigned long long i = 0; i < image.n_rows; i++) {
         for (unsigned long long j = 0; j < image.n_cols; j++) {
@@ -167,10 +172,10 @@ arma::mat reduce_dimension(arma::mat X, int rows, int cols){
 
 int main() {
     arma::mat image(read_pgm("../source/image.pgm"));
-    arma::mat H(2,2);
-    H = make_H_1();
-    arma::mat Y = conv2d_comp(image,H);
-    Y = threshold_mat(Y,0,255);
+    // arma::mat H(2,2);
+    // H = make_H_1();
+    // arma::mat Y = conv2d_comp(image,H);
+    // Y = threshold_mat(Y,0,255);
     // Y = reduce_dimension(Y,image.n_rows,image.n_cols);
-    write_pgm(Y,"output.pgm");
+    write_pgm(image,"output.pgm");
 }

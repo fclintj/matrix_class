@@ -24,7 +24,7 @@ mat	multiplication.c	/^    int *mat;$/;"	m	struct:mat	file:
 mat	multiplication.c	/^struct mat {$/;"	s	file:
 multiply	multiplication.c	/^void multiply(struct mat* arr, struct mat* arr2, struct mat* result ){$/;"	f
 print_mat	multiplication.c	/^void print_mat(struct mat* arr){$/;"	f
-read_pgm	lab1.cpp	/^arma::mat read_pgm(std::string name) {$/;"	f
+read_pgm	lab1.cpp	/^arma::mat read_pgm(std::string fname){$/;"	f
 reduce_dimension	lab1.cpp	/^arma::mat reduce_dimension(arma::mat X, int rows, int cols){$/;"	f
 rows	multiplication.c	/^    int rows;$/;"	m	struct:mat	file:
 sum_array	multiplication.c	/^int sum_array(int* arr, int size){$/;"	f
