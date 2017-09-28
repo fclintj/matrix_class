@@ -14,7 +14,7 @@ set(${exe_name}_deps
     # ${CMAKE_THREAD_LIBS_INIT} 
     # ${OpenCV_LIBS} 
     # ${Boost_LIBRARIES}
-    # "-ltbb"
+    -larmadillo
     )
 
 set(${exe_name}_srcs 
