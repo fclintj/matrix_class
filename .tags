@@ -4,36 +4,29 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-JumpToLine	lab1.cpp.html	/^function JumpToLine()$/;"	f
-Mat	lab1.cpp	/^        Mat()$/;"	f	class:Mat
-Mat	lab1.cpp	/^        Mat(int r, int c)$/;"	f	class:Mat
-Mat	lab1.cpp	/^        Mat(matrix mat)$/;"	f	class:Mat
-Mat	lab1.cpp	/^class Mat $/;"	c	file:
 NUMTHREADS	multiplication.c	6;"	d	file:
-add_border	lab1.cpp	/^Mat add_border(Mat orig) {$/;"	f
+add_col_border	armidillo.cpp	/^arma::mat add_col_border(arma::mat X, int n) {$/;"	f
+add_col_border	lab1.cpp	/^arma::mat add_col_border(arma::mat X, int n) {$/;"	f
+add_row_border	armidillo.cpp	/^arma::mat add_row_border(arma::mat X, int n) {$/;"	f
+add_row_border	lab1.cpp	/^arma::mat add_row_border(arma::mat X, int n) {$/;"	f
 cols	multiplication.c	/^    int cols;$/;"	m	struct:mat	file:
-conv2d	lab1.cpp	/^Mat conv2d(Mat X, Mat H) {$/;"	f
-conv2d_comp	lab1.cpp	/^Mat conv2d_comp(Mat X, Mat H) {$/;"	f
+conv2d	lab1.cpp	/^arma::mat conv2d(arma::mat X, arma::mat H) {$/;"	f
+conv2d_comp	armidillo.cpp	/^arma::mat conv2d_comp(arma::mat X, arma::mat H) {$/;"	f
+conv2d_comp	lab1.cpp	/^arma::mat conv2d_comp(arma::mat X, arma::mat H) {$/;"	f
 fill_H_1	multiplication.c	/^void fill_H_1(struct mat* arr)$/;"	f
-fill_mat	lab1.cpp	/^void fill_mat(Mat& mat) {$/;"	f
 fill_mat	multiplication.c	/^void fill_mat(struct mat* arr){$/;"	f
-loc	lab1.cpp	/^        matrix loc;$/;"	m	class:Mat	file:
-m	lab1.cpp	/^        int m;$/;"	m	class:Mat	file:
+main	armidillo.cpp	/^int main() {$/;"	f
 main	lab1.cpp	/^int main() {$/;"	f
 main	multiplication.c	/^int main() {$/;"	f
-make_H_1	lab1.cpp	/^Mat make_H_1() {$/;"	f
+make_H_1	lab1.cpp	/^arma::mat make_H_1() {$/;"	f
 make_mat	multiplication.c	/^void make_mat(int rows, int cols, struct mat* arr){$/;"	f
 mat	multiplication.c	/^    int *mat;$/;"	m	struct:mat	file:
 mat	multiplication.c	/^struct mat {$/;"	s	file:
 multiply	multiplication.c	/^void multiply(struct mat* arr, struct mat* arr2, struct mat* result ){$/;"	f
-n	lab1.cpp	/^        int n; $/;"	m	class:Mat	file:
-operator *	lab1.cpp	/^        Mat operator*(double x) const {$/;"	f	class:Mat
-operator *	lab1.cpp	/^        friend Mat operator*(double x,const Mat& arr) {$/;"	f	class:Mat
-print	lab1.cpp	/^        void print()$/;"	f	class:Mat
 print_mat	multiplication.c	/^void print_mat(struct mat* arr){$/;"	f
-read_pgm	lab1.cpp	/^matrix read_pgm(std::string name) {$/;"	f
-remove_border	lab1.cpp	/^Mat remove_border(Mat orig) {$/;"	f
+read_pgm	lab1.cpp	/^arma::mat read_pgm(std::string name) {$/;"	f
+reduce_dimension	lab1.cpp	/^arma::mat reduce_dimension(arma::mat X, int rows, int cols){$/;"	f
 rows	multiplication.c	/^    int rows;$/;"	m	struct:mat	file:
 sum_array	multiplication.c	/^int sum_array(int* arr, int size){$/;"	f
-threshold_mat	lab1.cpp	/^Mat threshold_mat(Mat mat,int min,int max){$/;"	f
-write_pgm	lab1.cpp	/^void write_pgm(Mat image, std::string name) {$/;"	f
+threshold_mat	lab1.cpp	/^arma::mat threshold_mat(arma::mat mat, int min, int max){$/;"	f
+write_pgm	lab1.cpp	/^void write_pgm(arma::mat image, std::string name) {$/;"	f
