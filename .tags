@@ -1,0 +1,39 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+JumpToLine	lab1.cpp.html	/^function JumpToLine()$/;"	f
+Mat	lab1.cpp	/^        Mat()$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(int r, int c)$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(matrix mat)$/;"	f	class:Mat
+Mat	lab1.cpp	/^class Mat $/;"	c	file:
+NUMTHREADS	multiplication.c	6;"	d	file:
+add_border	lab1.cpp	/^Mat add_border(Mat orig) {$/;"	f
+cols	multiplication.c	/^    int cols;$/;"	m	struct:mat	file:
+conv2d	lab1.cpp	/^Mat conv2d(Mat X, Mat H) {$/;"	f
+conv2d_comp	lab1.cpp	/^Mat conv2d_comp(Mat X, Mat H) {$/;"	f
+fill_H_1	multiplication.c	/^void fill_H_1(struct mat* arr)$/;"	f
+fill_mat	lab1.cpp	/^void fill_mat(Mat& mat) {$/;"	f
+fill_mat	multiplication.c	/^void fill_mat(struct mat* arr){$/;"	f
+loc	lab1.cpp	/^        matrix loc;$/;"	m	class:Mat	file:
+m	lab1.cpp	/^        int m;$/;"	m	class:Mat	file:
+main	lab1.cpp	/^int main() {$/;"	f
+main	multiplication.c	/^int main() {$/;"	f
+make_H_1	lab1.cpp	/^Mat make_H_1() {$/;"	f
+make_mat	multiplication.c	/^void make_mat(int rows, int cols, struct mat* arr){$/;"	f
+mat	multiplication.c	/^    int *mat;$/;"	m	struct:mat	file:
+mat	multiplication.c	/^struct mat {$/;"	s	file:
+multiply	multiplication.c	/^void multiply(struct mat* arr, struct mat* arr2, struct mat* result ){$/;"	f
+n	lab1.cpp	/^        int n; $/;"	m	class:Mat	file:
+operator *	lab1.cpp	/^        Mat operator*(double x) const {$/;"	f	class:Mat
+operator *	lab1.cpp	/^        friend Mat operator*(double x,const Mat& arr) {$/;"	f	class:Mat
+print	lab1.cpp	/^        void print()$/;"	f	class:Mat
+print_mat	multiplication.c	/^void print_mat(struct mat* arr){$/;"	f
+read_pgm	lab1.cpp	/^matrix read_pgm(std::string name) {$/;"	f
+remove_border	lab1.cpp	/^Mat remove_border(Mat orig) {$/;"	f
+rows	multiplication.c	/^    int rows;$/;"	m	struct:mat	file:
+sum_array	multiplication.c	/^int sum_array(int* arr, int size){$/;"	f
+threshold_mat	lab1.cpp	/^Mat threshold_mat(Mat mat,int min,int max){$/;"	f
+write_pgm	lab1.cpp	/^void write_pgm(Mat image, std::string name) {$/;"	f
