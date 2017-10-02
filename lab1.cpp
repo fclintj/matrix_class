@@ -7,7 +7,7 @@ arma::mat read_pgm(std::string fname){
 	unsigned char d;
     std::ifstream infile;
     std::stringstream ss;
-    std::string inputLine = "";
+    std::string inputLine;
 
 	infile.open(fname, std::ios::binary);
 
@@ -44,6 +44,7 @@ arma::mat read_pgm(std::string fname){
 
     return fimage;
 }
+
 void write_pgm(arma::mat image, std::string name) {
     std::ofstream file;
     file.open(name);
@@ -100,9 +101,10 @@ arma::mat conv2d(arma::mat X, arma::mat H) {
     arma::mat Y(X.n_rows+H.n_rows-1,X.n_cols+H.n_cols-1);
     X = add_row_border(X,H.n_rows-1);
     X = add_col_border(X,H.n_cols-1);
+    double sum = 0;
     for (unsigned long long i = 0; i < Y.n_rows; i++) {	
         for (unsigned long long j = 0; j < Y.n_cols; j++) {
-            int sum = 0;
+            sum = 0;
             // calculate convolution directly. Flipping matrix in process 
             for (unsigned long long k = 0; k < H.n_rows; k++) {
                 for (unsigned long long l = 0; l < H.n_cols; l++) {
@@ -114,7 +116,6 @@ arma::mat conv2d(arma::mat X, arma::mat H) {
     }
     return Y;
 }
-
 
 arma::mat threshold_mat(arma::mat mat, int min, int max){
      for (unsigned long long i = 0; i < mat.n_rows; i++) {
@@ -180,7 +181,7 @@ arma::mat make_S_2(){
     return mat;
 }
 
-void problem1(){
+void problem2(){
     arma::mat F, H_1,Y;
     F = read_pgm("../source/image.pgm");
 
@@ -188,10 +189,10 @@ void problem1(){
 
     Y = conv2d_aspects(F, H_1);
     Y = threshold_mat(Y,0,255);
-    write_pgm(Y,"problem1.pgm");
+    write_pgm(Y,"../report/media/problem2.pgm");
 }
 
-void problem2(){
+void problem3(){
     arma::mat F, S_1, S_2, G_1, G_2, Y, Y_v, Y_h;
     F = read_pgm("../source/image.pgm");
 
@@ -208,29 +209,36 @@ void problem2(){
     G_1 = conv2d_aspects(F,S_1);
     G_2 = conv2d_aspects(F,S_2);
     Y = arma::abs(G_1) + arma::abs(G_2);
+    Y = threshold_mat(Y,0,255);
 
-    write_pgm(Y,"problem2.pgm");
-    write_pgm(Y_v,"problem2_ver.pgm");
-    write_pgm(Y_h,"problem2_hor.pgm");
+    write_pgm(Y,"../report/media/problem3.pgm");
+    write_pgm(Y_v,"../report/media/problem3_ver.pgm");
+    write_pgm(Y_h,"../report/media/problem3_hor.pgm");
 }
 
-void problem3(){
+void problem4(){
     arma::mat F, H, Y;
-    int min, max;
+    long double min, max;
+    
     F = read_pgm("../source/image.pgm");
-    H = read_pgm("../source/filter_final.pgm");
+    H = read_pgm("../report/media/filter_final.pgm");
     
     min = arma::min(arma::min(H));
-    max = arma::max(arma::max(H));
 
     H = H-min;
-    H = H*255/max; 
-
     Y = conv2d_aspects(F,H);
 
-    write_pgm(Y,"problem3.pgm");
+    max = arma::max(arma::max(Y));
+    std::cout << max << std::endl;
+
+    Y = floor(Y*255.0/max); 
+    Y = threshold_mat(Y,0,255);
+
+    write_pgm(Y,"../report/media/problem4.pgm");
 }
 
 int main() {
+    problem2();
     problem3();
+    problem4();
 }
