@@ -4,9 +4,9 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-Mat	lab1.cpp	/^        Mat()$/;"	f	class:Mat
-Mat	lab1.cpp	/^        Mat(int r, int c)$/;"	f	class:Mat
-Mat	lab1.cpp	/^        Mat(matrix mat)$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat() {$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(int r, int c) {$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(matrix mat) {$/;"	f	class:Mat
 Mat	lab1.cpp	/^class Mat {$/;"	c	file:
 abs	lab1.cpp	/^Mat abs(Mat X){$/;"	f
 add_border	lab1.cpp	/^Mat add_border(Mat orig) {$/;"	f
@@ -26,8 +26,8 @@ main	lab1.cpp	/^int main() {$/;"	f
 make_H_1	lab1.cpp	/^Mat make_H_1() {$/;"	f
 make_S_1	lab1.cpp	/^Mat make_S_1(){$/;"	f
 make_S_2	lab1.cpp	/^Mat make_S_2(){$/;"	f
-max	lab1.cpp	/^        double max(){$/;"	f	class:Mat
-min	lab1.cpp	/^        double min(){$/;"	f	class:Mat
+max	lab1.cpp	/^        double max() {$/;"	f	class:Mat
+min	lab1.cpp	/^        double min() {$/;"	f	class:Mat
 n	lab1.cpp	/^        int n; $/;"	m	class:Mat	file:
 operator *	lab1.cpp	/^        Mat operator*(double x) const {$/;"	f	class:Mat
 operator *	lab1.cpp	/^        friend Mat operator*(double x,const Mat& arr) {$/;"	f	class:Mat
@@ -44,7 +44,6 @@ problem4	lab1.cpp	/^void problem4(){$/;"	f
 read_pgm_p2	lab1.cpp	/^matrix read_pgm_p2(std::string name) {$/;"	f
 read_pgm_p5	lab1.cpp	/^Mat read_pgm_p5(std::string fname){$/;"	f
 reduce_dimension	lab1.cpp	/^Mat reduce_dimension(Mat X, int rows, int cols){$/;"	f
-remove_border	lab1.cpp	/^Mat remove_border(Mat orig) {$/;"	f
 remove_col	lab1.cpp	/^Mat remove_col(Mat X, int start, int stop){$/;"	f
 remove_row	lab1.cpp	/^Mat remove_row(Mat X, int start, int stop){$/;"	f
 threshold_mat	lab1.cpp	/^Mat threshold_mat(Mat mat,int min,int max){$/;"	f

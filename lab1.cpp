@@ -1,8 +1,9 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include <algorithm>
+#include <math.h>
 using matrix = std::vector<std::vector<double>>;
 
 class Mat {
@@ -11,22 +12,19 @@ class Mat {
         int m;
         int n; 
 
-        Mat()
-        {
+        Mat() {
             m = 1;
             n = 1;
             loc.resize( m, std::vector<double>( n, 0) );
         }
 
-        Mat(int r, int c)
-        {
+        Mat(int r, int c) {
             m = r;
             n = c;
             loc.resize( m, std::vector<double>( n, 0) );
         };
 
-        Mat(matrix mat)
-        {
+        Mat(matrix mat) {
             m = mat.size();
             n = mat[0].size();
             loc.resize( m, std::vector<double>( n, 0) );
@@ -34,7 +32,7 @@ class Mat {
         };
 
 
-        double max(){
+        double max() {
             double max = 0;
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
@@ -46,7 +44,7 @@ class Mat {
             return max;
         }
 
-        double min(){
+        double min() {
             double min = loc[0][0];
 
             for (int i = 0; i < m; i++) {
@@ -268,6 +266,26 @@ Mat read_pgm_p5(std::string fname){
     return image;
 }
 
+void write_pgm_p5(Mat image, std::string name){
+    std::ofstream file(name,std::ios_base::out |std::ios_base::binary |std::ios_base::trunc);
+    int maxColorValue = 255;
+
+    file << "P5\n" << image.n << " " << image.m<< "\n" << maxColorValue << "\n";
+
+    unsigned char *buff = new unsigned char[image.m*image.n*sizeof(unsigned char)];
+
+
+    for(int i=0; i < int(image.m);++i){
+        for(int j=0; j < int(image.n);++j){
+            buff[(i*image.m) + j] = image.loc[i][j];
+        }
+    }
+
+    file.write((char *)buff, image.n*image.m*sizeof(unsigned char)); 
+    file.close();
+    std::cout << "Image written to " << name << "." << std::endl;
+}
+
 matrix read_pgm_p2(std::string name) {
     int row = 0, col = 0, numrows = 0, numcols = 0;
     std::ifstream infile(name);
@@ -306,26 +324,6 @@ matrix read_pgm_p2(std::string name) {
     // }
     infile.close();
     return image;    
-}
-
-void write_pgm_p5(Mat image, std::string name){
-    std::ofstream file(name,std::ios_base::out |std::ios_base::binary |std::ios_base::trunc);
-    int maxColorValue = 255;
-
-    file << "P5\n" << image.n << " " << image.m<< "\n" << maxColorValue << "\n";
-
-    unsigned char *buff = new unsigned char[image.m*image.n*sizeof(unsigned char)];
-
-
-    for(int i=0; i < int(image.m);++i){
-        for(int j=0; j < int(image.n);++j){
-            buff[(i*image.m) + j] = image.loc[i][j];
-        }
-    }
-
-    file.write((char *)buff, image.n*image.m*sizeof(unsigned char)); 
-    file.close();
-    std::cout << "Image written to " << name << "." << std::endl;
 }
 
 void write_pgm_p2(Mat image, std::string name) {
@@ -369,6 +367,7 @@ void count_mat(Mat& mat) {
         }
     }
 }
+
 Mat add_row_border(Mat X, int n) {
     Mat new_image(X.m+2*n,X.n);
 
@@ -390,6 +389,7 @@ Mat add_col_border(Mat X, int n) {
     }
     return new_image;
 }
+
 Mat add_border(Mat orig) {
     Mat new_image;
     new_image.m=orig.m+2;;
@@ -399,20 +399,6 @@ Mat add_border(Mat orig) {
     for (int i = 1; i < new_image.m-1; i++) {
         for (int j = 1; j < new_image.n-1; j++) {
             new_image.loc[i][j] = orig.loc[i-1][j-1]; 
-        }
-    }
-    return new_image;
-}
-
-Mat remove_border(Mat orig) {
-    Mat new_image;
-    new_image.m=orig.m-2;;
-    new_image.n=orig.n-2;
-    new_image.loc.resize( new_image.m, std::vector<double>( new_image.n, 0) );
-
-    for (int i = 0; i < new_image.m; i++) {
-        for (int j = 0; j < new_image.n; j++) {
-            new_image.loc[i][j] = orig.loc[i+1][j+1]; 
         }
     }
     return new_image;
@@ -456,7 +442,6 @@ Mat remove_col(Mat X, int start, int stop){
 }
 
 Mat remove_row(Mat X, int start, int stop){
-
     Mat Y(X.m-(stop-start),X.n);
 
     for (int i = 0; i < X.m; i++) {
@@ -537,18 +522,6 @@ Mat make_S_2(){
     return mat;
 }
 
-void problem2(){
-    Mat F, H_1,Y;
-    F = read_pgm_p5("../source/image.pgm");
-
-    H_1 = make_H_1();
-
-    Y = conv2d_aspects(F, H_1);
-    Y = threshold_mat(Y,0,255);
-    write_pgm_p5(Y,"../report/media/problem2.pgm");
-}
-
-
 Mat abs(Mat X){
     Mat Y = X;
     for (int i = 0; i < X.m; i++) {
@@ -559,6 +532,28 @@ Mat abs(Mat X){
         }
     }
     return Y;
+}
+
+Mat fill_mat(double data[],int m,int n){
+    Mat Y(m,n); 
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            Y.loc[i][j] = data[i*n+j];
+        }
+    }
+
+    return Y;
+}
+
+void problem2(){
+    Mat F, H_1,Y;
+    F = read_pgm_p5("../source/image.pgm");
+
+    H_1 = make_H_1();
+
+    Y = conv2d_aspects(F, H_1);
+    Y = threshold_mat(Y,0,255);
+    write_pgm_p5(Y,"../report/media/problem2.pgm");
 }
 
 void problem3(){
@@ -595,36 +590,20 @@ void problem4(){
     H = H-H.min();
     Y = conv2d_aspects(F,H);
     
-    Y = Y*255.0/Y.max(); 
+    Y = Y*255.0/(Y.max()); 
     Y = threshold_mat(Y,0,255);
 
-    // write_pgm_p5(Y,"../report/media/problem4.pgm");
+    write_pgm_p5(Y,"../report/media/problem4.pgm");
 }
-
-Mat fill_mat(double data[],int m,int n){
-    Mat Y(m,n); 
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            Y.loc[i][j] = data[i*n+j];
-        }
-    }
-
-    return Y;
-}
-
-
 
 int main() {
     // problem2();
     // problem3();
-    problem4();
+    // problem4();
 
-    // Mat F,Y,H;
-    // double data[9] = 
-    //     { 1,0,-1,
-    //       2,0,-2,
-    //       1,0,-1 };
-    //
-    // H = fill_mat(data,3,3);
-    // H.print();
+    Mat test(2,2);
+    count_mat(test);
+    test.print();
+
+return 0;
 }
