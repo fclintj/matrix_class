@@ -148,77 +148,90 @@ class Mat {
 
         void print()
         {
-            if (n < 15 && m < 200) 
-            {
-                // to change the width, change in printf statement, and make int 3 lines down +1
-                printf("┌");
-                for (int i = 0; i < 8*n; i++) {
+            int width = 7;
+            if (n < 15 && m < 200) {
+                
+                // create top of matrix
+                std::cout << "┌" ;
+                for (int i = 0; i < 8*n+1; i++) {
                     printf(" ");
                 }
-                printf("┐\n");
+                std::cout << "┐\n" ;
 
+                // create body of matrix
                 for (int i = 0; i < m; i++){
-                    printf("│");
+                    std::cout << "│" ;
                     for (int j = 0; j < n; j++){ 
-                        printf("%7.2f ",loc[i][j]);
+                        std::cout << " " << std::setw(width) << loc[i][j];
                     } 
-                    printf("│\n");
+                    std::cout << " │" << std::endl;
                 }
-                printf("└");
+
+                // create bottom of matrix
+                std::cout << "└" ;
                 for (int i = 0; i < 8*n; i++) {
-                    printf(" ");
+                    std::cout << " ";
                 }
-                printf("┘\n");
+                std::cout << " ┘" << std::endl;
             }
 
             else 
             {
                 int length = 10;
                 int height = 8;
+
                 if (n < length*2) { length = ceil(double(n)/2); }
                 if (m < height) { height = m; }
 
-                printf("┌");
+                std::cout << "┌" ;
                 for (int i = 0; i < 6*length; i++) {
-                    printf(" ");
+                    std::cout << " ";
                 }
-                printf("\n│");
+                std::cout << std::endl << "│";
+                
                 // print first line ...
                 for (int j = 0; j < length; j++){ 
-                    printf("%7.2f ",loc[0][j]);
+                    std::cout << " " << std::setw(width) << loc[0][j];
                 }
-                printf("...\n");
+                std::cout << " ..." << std::endl;
 
+                // print second line
                 for (int i = 1; i < height; i++){
-                    printf("│");
+                    std::cout << "│";
                     for (int j = 0; j < length; j++){ 
-                        printf("%7.2f ",loc[i][j]);
+                        std::cout << " " << std::setw(width) << loc[i][j];
                     } 
-                    printf("\n");
+                    std::cout << std::endl;
                 }
 
-                printf("\n");
+                std::cout << std::endl;
+                for (int j = 0; j < width + 1; j++) {
+                    std::cout << " ";  
+                }
+                std::cout <<  std::endl;
 
                 // print the last block of the matrix
                 for (int i = m-height; i < m-1; i++){
-                    printf("    ");
+                    std::cout << "   ";
+
                     for (int j = n-length; j < n; j++){ 
-                        printf("%7.2f ",loc[i][j]);
+                        std::cout << " " << std::setw(width) << loc[i][j];
                     } 
-                    printf("│\n");
+                    std::cout << " │" << std::endl;
                 }
 
-                printf(" ...");
+                std::cout << "...";
+
                 for (int j = n-length; j < n; j++){ 
-                    printf("%7.2f ",loc[m-1][j]);
+                    std::cout << " " << std::setw(width) << loc[m-1][j];
                 } 
-                printf("│\n");
+                std::cout << " │" << std::endl;
 
 
                 for (int i = 0; i < 8*length; i++) {
-                    printf(" ");
+                    std::cout << " ";
                 }
-                printf("    ┘\n");
+                std::cout << "    ┘\n" << std::endl;
                 printf("%d X %d\n",m,n);
             }
         }
@@ -552,6 +565,7 @@ void problem2(){
     H_1 = make_H_1();
 
     Y = conv2d_aspects(F, H_1);
+    Y.print();
     Y = threshold_mat(Y,0,255);
     write_pgm_p5(Y,"../report/media/problem2.pgm");
 }
@@ -597,13 +611,10 @@ void problem4(){
 }
 
 int main() {
-    // problem2();
+    problem2();
     // problem3();
     // problem4();
 
-    Mat test(2,2);
-    count_mat(test);
-    test.print();
 
 return 0;
 }
