@@ -8,6 +8,7 @@ Mat	lab1.cpp	/^        Mat()$/;"	f	class:Mat
 Mat	lab1.cpp	/^        Mat(int r, int c)$/;"	f	class:Mat
 Mat	lab1.cpp	/^        Mat(matrix mat)$/;"	f	class:Mat
 Mat	lab1.cpp	/^class Mat {$/;"	c	file:
+abs	lab1.cpp	/^Mat abs(Mat X){$/;"	f
 add_border	lab1.cpp	/^Mat add_border(Mat orig) {$/;"	f
 add_col_border	armidillo.cpp	/^arma::mat add_col_border(arma::mat X, int n) {$/;"	f
 add_col_border	lab1.cpp	/^Mat add_col_border(Mat X, int n) {$/;"	f
@@ -16,20 +17,30 @@ add_row_border	lab1.cpp	/^Mat add_row_border(Mat X, int n) {$/;"	f
 conv2d	lab1.cpp	/^Mat conv2d(Mat X, Mat H) {$/;"	f
 conv2d_aspects	lab1.cpp	/^Mat conv2d_aspects(Mat X, Mat H){$/;"	f
 conv2d_comp	armidillo.cpp	/^arma::mat conv2d_comp(arma::mat X, arma::mat H) {$/;"	f
-fill_mat	lab1.cpp	/^void fill_mat(Mat& mat) {$/;"	f
+count_mat	lab1.cpp	/^void count_mat(Mat& mat) {$/;"	f
+fill_mat	lab1.cpp	/^Mat fill_mat(double data[],int m,int n){$/;"	f
 loc	lab1.cpp	/^        matrix loc;$/;"	m	class:Mat	file:
 m	lab1.cpp	/^        int m;$/;"	m	class:Mat	file:
 main	armidillo.cpp	/^int main() {$/;"	f
 main	lab1.cpp	/^int main() {$/;"	f
 make_H_1	lab1.cpp	/^Mat make_H_1() {$/;"	f
+make_S_1	lab1.cpp	/^Mat make_S_1(){$/;"	f
+make_S_2	lab1.cpp	/^Mat make_S_2(){$/;"	f
+max	lab1.cpp	/^        double max(){$/;"	f	class:Mat
+min	lab1.cpp	/^        double min(){$/;"	f	class:Mat
 n	lab1.cpp	/^        int n; $/;"	m	class:Mat	file:
 operator *	lab1.cpp	/^        Mat operator*(double x) const {$/;"	f	class:Mat
 operator *	lab1.cpp	/^        friend Mat operator*(double x,const Mat& arr) {$/;"	f	class:Mat
+operator +	lab1.cpp	/^        Mat operator+(Mat x) const {$/;"	f	class:Mat
 operator +	lab1.cpp	/^        Mat operator+(double x) const {$/;"	f	class:Mat
 operator +	lab1.cpp	/^        friend Mat operator+(double x,const Mat& arr) {$/;"	f	class:Mat
 operator -	lab1.cpp	/^        Mat operator-(double x) const {$/;"	f	class:Mat
 operator -	lab1.cpp	/^        friend Mat operator-(double x,const Mat& arr) {$/;"	f	class:Mat
+operator /	lab1.cpp	/^        Mat operator\/(double x) const {$/;"	f	class:Mat
 print	lab1.cpp	/^        void print()$/;"	f	class:Mat
+problem2	lab1.cpp	/^void problem2(){$/;"	f
+problem3	lab1.cpp	/^void problem3(){$/;"	f
+problem4	lab1.cpp	/^void problem4(){$/;"	f
 read_pgm_p2	lab1.cpp	/^matrix read_pgm_p2(std::string name) {$/;"	f
 read_pgm_p5	lab1.cpp	/^Mat read_pgm_p5(std::string fname){$/;"	f
 reduce_dimension	lab1.cpp	/^Mat reduce_dimension(Mat X, int rows, int cols){$/;"	f

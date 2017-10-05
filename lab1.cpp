@@ -33,6 +33,121 @@ class Mat {
             loc = mat;
         };
 
+
+        double max(){
+            double max = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (loc[i][j] > max){
+                        max = loc[i][j];
+                    }
+                }
+            }
+            return max;
+        }
+
+        double min(){
+            double min = loc[0][0];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (loc[i][j] < min){
+                        min = loc[i][j];
+                    }
+                }
+            }
+            return min;
+        }
+        
+        // multiply a scalar 
+        Mat operator*(double x) const {
+            Mat mat(this->m,this->n);
+            for (int i = 0; i < this->m; i++) {
+                for (int j = 0; j < this->n; j++) {
+                    mat.loc[i][j] = x*this->loc[i][j];
+                }
+            }
+            return mat;
+        }
+        
+        // divide a scalar
+        Mat operator/(double x) const {
+            Mat mat(this->m,this->n);
+            for (int i = 0; i < this->m; i++) {
+                for (int j = 0; j < this->n; j++) {
+                    mat.loc[i][j] = this->loc[i][j]/x;
+                }
+            }
+            return mat;
+        }
+
+        // multiply a scalar both directions
+        friend Mat operator*(double x,const Mat& arr) {
+            Mat mat(arr.m,arr.n);
+            for (int i = 0; i < arr.m; i++) {
+                for (int j = 0; j < arr.n; j++) {
+                    mat.loc[i][j] = x*arr.loc[i][j];
+                }
+            }
+            return mat;
+        }
+
+        // add a scalar
+        Mat operator+(double x) const {
+            Mat mat(this->m,this->n);
+            for (int i = 0; i < this->m; i++) {
+                for (int j = 0; j < this->n; j++) {
+                    mat.loc[i][j] = x+this->loc[i][j];
+                }
+            }
+            return mat;
+        }
+
+        // add a scalar in both directions
+        friend Mat operator+(double x,const Mat& arr) {
+            Mat mat(arr.m,arr.n);
+            for (int i = 0; i < arr.m; i++) {
+                for (int j = 0; j < arr.n; j++) {
+                    mat.loc[i][j] = x+arr.loc[i][j];
+                }
+            }
+            return mat;
+        }
+
+
+        // add two matrices
+        Mat operator+(Mat x) const {
+            Mat mat(this->m,this->n);
+            for (int i = 0; i < this->m; i++) {
+                for (int j = 0; j < this->n; j++) {
+                    mat.loc[i][j] = x.loc[i][j]+this->loc[i][j];
+                }
+            }
+            return mat;
+        }
+
+        // subtract a scalar
+        Mat operator-(double x) const {
+            Mat mat(this->m,this->n);
+            for (int i = 0; i < this->m; i++) {
+                for (int j = 0; j < this->n; j++) {
+                    mat.loc[i][j] = this->loc[i][j]-x;
+                }
+            }
+            return mat;
+        }
+
+        // subtract a scalar in both directions
+        friend Mat operator-(double x,const Mat& arr) {
+            Mat mat(arr.m,arr.n);
+            for (int i = 0; i < arr.m; i++) {
+                for (int j = 0; j < arr.n; j++) {
+                    mat.loc[i][j] = x-arr.loc[i][j];
+                }
+            }
+            return mat;
+        }
+
         void print()
         {
             if (n < 15 && m < 200) 
@@ -109,65 +224,6 @@ class Mat {
                 printf("%d X %d\n",m,n);
             }
         }
-
-        // Overload * operator to multiply a scalar objects.
-        Mat operator*(double x) const {
-            Mat mat(this->m,this->n);
-            for (int i = 0; i < this->m; i++) {
-                for (int j = 0; j < this->n; j++) {
-                    mat.loc[i][j] = x*this->loc[i][j];
-                }
-            }
-            return mat;
-        }
-
-        friend Mat operator*(double x,const Mat& arr) {
-            Mat mat(arr.m,arr.n);
-            for (int i = 0; i < arr.m; i++) {
-                for (int j = 0; j < arr.n; j++) {
-                    mat.loc[i][j] = x*arr.loc[i][j];
-                }
-            }
-            return mat;
-        }
-        Mat operator+(double x) const {
-            Mat mat(this->m,this->n);
-            for (int i = 0; i < this->m; i++) {
-                for (int j = 0; j < this->n; j++) {
-                    mat.loc[i][j] = x+this->loc[i][j];
-                }
-            }
-            return mat;
-        }
-
-        friend Mat operator+(double x,const Mat& arr) {
-            Mat mat(arr.m,arr.n);
-            for (int i = 0; i < arr.m; i++) {
-                for (int j = 0; j < arr.n; j++) {
-                    mat.loc[i][j] = x+arr.loc[i][j];
-                }
-            }
-            return mat;
-        }
-        Mat operator-(double x) const {
-            Mat mat(this->m,this->n);
-            for (int i = 0; i < this->m; i++) {
-                for (int j = 0; j < this->n; j++) {
-                    mat.loc[i][j] = this->loc[i][j]-x;
-                }
-            }
-            return mat;
-        }
-
-        friend Mat operator-(double x,const Mat& arr) {
-            Mat mat(arr.m,arr.n);
-            for (int i = 0; i < arr.m; i++) {
-                for (int j = 0; j < arr.n; j++) {
-                    mat.loc[i][j] = x-arr.loc[i][j];
-                }
-            }
-            return mat;
-        }
 };
 
 Mat read_pgm_p5(std::string fname){
@@ -200,9 +256,7 @@ Mat read_pgm_p5(std::string fname){
     ss >> N >> M;
     getline(infile,input_line);
 
-     
     Mat image(M,N);
-
 
     for(int i=0; i<M; i++) {
         for(int j=0; j<N; j++) {
@@ -307,7 +361,7 @@ Mat make_H_1() {
     return 1/double(81)*mat;
 }
 
-void fill_mat(Mat& mat) {
+void count_mat(Mat& mat) {
     int count = 0;
     for (int i = 0; i < mat.m; i++) {
         for (int j = 0; j < mat.n; j++) {
@@ -494,6 +548,19 @@ void problem2(){
     write_pgm_p5(Y,"../report/media/problem2.pgm");
 }
 
+
+Mat abs(Mat X){
+    Mat Y = X;
+    for (int i = 0; i < X.m; i++) {
+        for (int j = 0; j < X.n; j++) {
+            if(X.loc[i][j] < 0) {
+                Y.loc[i][j] = X.loc[i][j]*-1;
+            }
+        }
+    }
+    return Y;
+}
+
 void problem3(){
     Mat F, S_1, S_2, G_1, G_2, Y, Y_v, Y_h;
     F = read_pgm_p5("../source/image.pgm");
@@ -505,55 +572,59 @@ void problem3(){
     Y_v = conv2d_aspects(F,S_1);
     Y_v = threshold_mat(Y_v,0,255);
     // horizontal convolution
-    Y_v = conv2d_aspects(F,S_1);
     Y_h = conv2d_aspects(F,S_2);
     Y_h = threshold_mat(Y_h,0,255);
 
 
     G_1 = conv2d_aspects(F,S_1);
     G_2 = conv2d_aspects(F,S_2);
-    Y = arma::abs(G_1) + arma::abs(G_2);
+    Y = abs(G_1) + abs(G_2);
     Y = threshold_mat(Y,0,255);
 
-    write_pgm_p5(Y,"../report/media/problem3.pgm");
     write_pgm_p5(Y_v,"../report/media/problem3_ver.pgm");
     write_pgm_p5(Y_h,"../report/media/problem3_hor.pgm");
+    write_pgm_p5(Y,"../report/media/problem3.pgm");
 }
 
 void problem4(){
     Mat F, H, Y;
-    long double min, max;
     
     F = read_pgm_p5("../source/image.pgm");
     H = read_pgm_p5("../report/media/filter_final.pgm");
 
-    min = arma::min(arma::min(H));
-    max = arma::max(arma::max(H));
-    std::cout << min << std::endl;
-    std::cout << max << std::endl;
-
-    std::cout << H.min()  << std::endl;
-    std::cout << H.max() << std::endl;
-
-    H = H-min;
-
+    H = H-H.min();
     Y = conv2d_aspects(F,H);
+    
+    Y = Y*255.0/Y.max(); 
+    Y = threshold_mat(Y,0,255);
 
-    // max = arma::max(arma::max(Y));
-    // std::cout << max << std::endl;
-    //
-    // Y = floor(Y*255.0/max); 
-    // Y = threshold_mat(Y,0,255);
-    //
     // write_pgm_p5(Y,"../report/media/problem4.pgm");
 }
 
+Mat fill_mat(double data[],int m,int n){
+    Mat Y(m,n); 
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            Y.loc[i][j] = data[i*n+j];
+        }
+    }
+
+    return Y;
+}
+
+
+
 int main() {
-    Mat F, H, Y;
-    F = read_pgm_p5("../source/image.pgm");
-    H = make_H_1();
+    // problem2();
+    // problem3();
+    problem4();
 
-    Y = conv2d_aspects(F,H);
-
-    write_pgm_p5(Y,"name.pgm");
+    // Mat F,Y,H;
+    // double data[9] = 
+    //     { 1,0,-1,
+    //       2,0,-2,
+    //       1,0,-1 };
+    //
+    // H = fill_mat(data,3,3);
+    // H.print();
 }
