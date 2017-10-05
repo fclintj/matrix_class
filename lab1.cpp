@@ -3,11 +3,11 @@
 #include <sstream> 
 #include <armadillo>
 
-arma::mat read_pgm(std::string fname){
+arma::mat read_pgm_p5(std::string fname){
 	unsigned char d;
     std::ifstream infile;
     std::stringstream ss;
-    std::string inputLine;
+    std::string input_line;
 
 	infile.open(fname, std::ios::binary);
 
@@ -16,21 +16,22 @@ arma::mat read_pgm(std::string fname){
 		exit(1);
 	}
 
-    getline(infile,inputLine);
+    getline(infile,input_line);
 
-    if(inputLine.compare("P5") != 0){
+    if(input_line.compare("P5") != 0){
         std::cerr << "Image version error" << std::endl; 
         exit(1);
     }
 
-	getline(infile,inputLine);
-	while(inputLine[0]=='#')
-	    getline(infile,inputLine);
+	getline(infile,input_line);
+	while(input_line[0]=='#'){
+	    getline(infile,input_line);
+    }
 
     int M,N;
-    ss.str(inputLine);
+    ss.str(input_line);
     ss >> N >> M;
-    getline(infile,inputLine);
+    getline(infile,input_line);
 
     
     arma::mat fimage(M,N);
@@ -45,9 +46,30 @@ arma::mat read_pgm(std::string fname){
     return fimage;
 }
 
-void write_pgm(arma::mat image, std::string name) {
+void write_pgm_p5(arma::mat image, std::string name){
+    std::ofstream file(name,std::ios_base::out |std::ios_base::binary |std::ios_base::trunc);
+    int maxColorValue = 255;
+
+    file << "P5\n" << image.n_cols << " " << image.n_rows<< "\n" << maxColorValue << "\n";
+
+    unsigned char *buff = new unsigned char[image.n_rows*image.n_cols*sizeof(unsigned char)];
+
+
+    for(int i=0; i < int(image.n_rows);++i){
+        for(int j=0; j < int(image.n_cols);++j){
+            buff[(i*image.n_rows) + j] = image(i,j);
+        }
+    }
+
+    file.write((char *)buff, image.n_cols*image.n_rows*sizeof(unsigned char)); 
+    file.close();
+    std::cout << "Image written to " << name << "." << std::endl;
+}
+
+void write_pgm_p2(arma::mat image, std::string name) {
     std::ofstream file;
     file.open(name);
+
     file << "P2" << std::endl;
     file << "# Created by Clint Ferrin" << std::endl;
     file << image.n_cols << " " << image.n_rows << std::endl;
@@ -61,7 +83,7 @@ void write_pgm(arma::mat image, std::string name) {
     file.close(); 
 
     std::stringstream ss;
-    std::string inputLine = "";
+    std::string input_line = "";
     std::cout << "Image written to " << name << "." << std::endl;
 }
 
@@ -183,18 +205,18 @@ arma::mat make_S_2(){
 
 void problem2(){
     arma::mat F, H_1,Y;
-    F = read_pgm("../source/image.pgm");
+    F = read_pgm_p5("../source/image.pgm");
 
     H_1 = make_H_1();
 
     Y = conv2d_aspects(F, H_1);
     Y = threshold_mat(Y,0,255);
-    write_pgm(Y,"../report/media/problem2.pgm");
+    write_pgm_p5(Y,"../report/media/problem2.pgm");
 }
 
 void problem3(){
     arma::mat F, S_1, S_2, G_1, G_2, Y, Y_v, Y_h;
-    F = read_pgm("../source/image.pgm");
+    F = read_pgm_p5("../source/image.pgm");
 
     S_1 = make_S_1();
     S_2 = make_S_2();
@@ -202,6 +224,8 @@ void problem3(){
     // vertical convolution
     Y_v = conv2d_aspects(F,S_1);
     Y_v = threshold_mat(Y_v,0,255);
+    // horizontal convolution
+    Y_v = conv2d_aspects(F,S_1);
     Y_h = conv2d_aspects(F,S_2);
     Y_h = threshold_mat(Y_h,0,255);
 
@@ -211,21 +235,28 @@ void problem3(){
     Y = arma::abs(G_1) + arma::abs(G_2);
     Y = threshold_mat(Y,0,255);
 
-    write_pgm(Y,"../report/media/problem3.pgm");
-    write_pgm(Y_v,"../report/media/problem3_ver.pgm");
-    write_pgm(Y_h,"../report/media/problem3_hor.pgm");
+    write_pgm_p5(Y,"../report/media/problem3.pgm");
+    write_pgm_p5(Y_v,"../report/media/problem3_ver.pgm");
+    write_pgm_p5(Y_h,"../report/media/problem3_hor.pgm");
 }
 
 void problem4(){
     arma::mat F, H, Y;
     long double min, max;
     
-    F = read_pgm("../source/image.pgm");
-    H = read_pgm("../report/media/filter_final.pgm");
-    
+    F = read_pgm_p5("../source/image.pgm");
+    H = read_pgm_p5("../report/media/filter_final.pgm");
+
     min = arma::min(arma::min(H));
+    max = arma::max(arma::max(H));
+    std::cout << min << std::endl;
+    std::cout << max << std::endl;
+
+    std::cout << H.min()  << std::endl;
+    std::cout << H.max() << std::endl;
 
     H = H-min;
+
     Y = conv2d_aspects(F,H);
 
     max = arma::max(arma::max(Y));
@@ -234,11 +265,12 @@ void problem4(){
     Y = floor(Y*255.0/max); 
     Y = threshold_mat(Y,0,255);
 
-    write_pgm(Y,"../report/media/problem4.pgm");
+    write_pgm_p5(Y,"../report/media/problem4.pgm");
 }
 
 int main() {
     problem2();
-    problem3();
-    problem4();
+    // problem3();
+    // problem4();
 }
+    

@@ -19,7 +19,8 @@ make_S_2	lab1.cpp	/^arma::mat make_S_2(){$/;"	f
 problem2	lab1.cpp	/^void problem2(){$/;"	f
 problem3	lab1.cpp	/^void problem3(){$/;"	f
 problem4	lab1.cpp	/^void problem4(){$/;"	f
-read_pgm	lab1.cpp	/^arma::mat read_pgm(std::string fname){$/;"	f
+read_pgm_p5	lab1.cpp	/^arma::mat read_pgm_p5(std::string fname){$/;"	f
 reduce_dimension	lab1.cpp	/^arma::mat reduce_dimension(arma::mat X, int rows, int cols){$/;"	f
 threshold_mat	lab1.cpp	/^arma::mat threshold_mat(arma::mat mat, int min, int max){$/;"	f
-write_pgm	lab1.cpp	/^void write_pgm(arma::mat image, std::string name) {$/;"	f
+write_pgm_p2	lab1.cpp	/^void write_pgm_p2(arma::mat image, std::string name) {$/;"	f
+write_pgm_p5	lab1.cpp	/^void write_pgm_p5(arma::mat image, std::string name){$/;"	f
