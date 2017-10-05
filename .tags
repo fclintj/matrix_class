@@ -4,23 +4,38 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Mat	lab1.cpp	/^        Mat()$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(int r, int c)$/;"	f	class:Mat
+Mat	lab1.cpp	/^        Mat(matrix mat)$/;"	f	class:Mat
+Mat	lab1.cpp	/^class Mat {$/;"	c	file:
+add_border	lab1.cpp	/^Mat add_border(Mat orig) {$/;"	f
 add_col_border	armidillo.cpp	/^arma::mat add_col_border(arma::mat X, int n) {$/;"	f
-add_col_border	lab1.cpp	/^arma::mat add_col_border(arma::mat X, int n) {$/;"	f
+add_col_border	lab1.cpp	/^Mat add_col_border(Mat X, int n) {$/;"	f
 add_row_border	armidillo.cpp	/^arma::mat add_row_border(arma::mat X, int n) {$/;"	f
-add_row_border	lab1.cpp	/^arma::mat add_row_border(arma::mat X, int n) {$/;"	f
-conv2d	lab1.cpp	/^arma::mat conv2d(arma::mat X, arma::mat H) {$/;"	f
-conv2d_aspects	lab1.cpp	/^arma::mat conv2d_aspects(arma::mat X, arma::mat H){$/;"	f
+add_row_border	lab1.cpp	/^Mat add_row_border(Mat X, int n) {$/;"	f
+conv2d	lab1.cpp	/^Mat conv2d(Mat X, Mat H) {$/;"	f
+conv2d_aspects	lab1.cpp	/^Mat conv2d_aspects(Mat X, Mat H){$/;"	f
 conv2d_comp	armidillo.cpp	/^arma::mat conv2d_comp(arma::mat X, arma::mat H) {$/;"	f
+fill_mat	lab1.cpp	/^void fill_mat(Mat& mat) {$/;"	f
+loc	lab1.cpp	/^        matrix loc;$/;"	m	class:Mat	file:
+m	lab1.cpp	/^        int m;$/;"	m	class:Mat	file:
 main	armidillo.cpp	/^int main() {$/;"	f
 main	lab1.cpp	/^int main() {$/;"	f
-make_H_1	lab1.cpp	/^arma::mat make_H_1() {$/;"	f
-make_S_1	lab1.cpp	/^arma::mat make_S_1(){$/;"	f
-make_S_2	lab1.cpp	/^arma::mat make_S_2(){$/;"	f
-problem2	lab1.cpp	/^void problem2(){$/;"	f
-problem3	lab1.cpp	/^void problem3(){$/;"	f
-problem4	lab1.cpp	/^void problem4(){$/;"	f
-read_pgm_p5	lab1.cpp	/^arma::mat read_pgm_p5(std::string fname){$/;"	f
-reduce_dimension	lab1.cpp	/^arma::mat reduce_dimension(arma::mat X, int rows, int cols){$/;"	f
-threshold_mat	lab1.cpp	/^arma::mat threshold_mat(arma::mat mat, int min, int max){$/;"	f
-write_pgm_p2	lab1.cpp	/^void write_pgm_p2(arma::mat image, std::string name) {$/;"	f
-write_pgm_p5	lab1.cpp	/^void write_pgm_p5(arma::mat image, std::string name){$/;"	f
+make_H_1	lab1.cpp	/^Mat make_H_1() {$/;"	f
+n	lab1.cpp	/^        int n; $/;"	m	class:Mat	file:
+operator *	lab1.cpp	/^        Mat operator*(double x) const {$/;"	f	class:Mat
+operator *	lab1.cpp	/^        friend Mat operator*(double x,const Mat& arr) {$/;"	f	class:Mat
+operator +	lab1.cpp	/^        Mat operator+(double x) const {$/;"	f	class:Mat
+operator +	lab1.cpp	/^        friend Mat operator+(double x,const Mat& arr) {$/;"	f	class:Mat
+operator -	lab1.cpp	/^        Mat operator-(double x) const {$/;"	f	class:Mat
+operator -	lab1.cpp	/^        friend Mat operator-(double x,const Mat& arr) {$/;"	f	class:Mat
+print	lab1.cpp	/^        void print()$/;"	f	class:Mat
+read_pgm_p2	lab1.cpp	/^matrix read_pgm_p2(std::string name) {$/;"	f
+read_pgm_p5	lab1.cpp	/^Mat read_pgm_p5(std::string fname){$/;"	f
+reduce_dimension	lab1.cpp	/^Mat reduce_dimension(Mat X, int rows, int cols){$/;"	f
+remove_border	lab1.cpp	/^Mat remove_border(Mat orig) {$/;"	f
+remove_col	lab1.cpp	/^Mat remove_col(Mat X, int start, int stop){$/;"	f
+remove_row	lab1.cpp	/^Mat remove_row(Mat X, int start, int stop){$/;"	f
+threshold_mat	lab1.cpp	/^Mat threshold_mat(Mat mat,int min,int max){$/;"	f
+write_pgm_p2	lab1.cpp	/^void write_pgm_p2(Mat image, std::string name) {$/;"	f
+write_pgm_p5	lab1.cpp	/^void write_pgm_p5(Mat image, std::string name){$/;"	f
